@@ -1,12 +1,14 @@
 import type { NextConfig } from "next";
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const backendInternalUrl =
+  process.env.BACKEND_INTERNAL_URL ?? "http://127.0.0.1:8000";
+
+const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
         source: "/api/:path*",
-        destination: "http://127.0.0.1:8000/:path*",
+        destination: `${backendInternalUrl}/:path*`,
       },
     ];
   },

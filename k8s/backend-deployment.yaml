@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airbnb-backend
+  namespace: airbnb-welcome
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: airbnb-backend
+  template:
+    metadata:
+      labels:
+        app: airbnb-backend
+    spec:
+      initContainers:
+        - name: init-db-file
+          image: busybox:1.36
+          command: ["sh", "-c", "mkdir -p /data && touch /data/guestbook.db"]
+          volumeMounts:
+            - name: backend-data
+              mountPath: /data
+      containers:
+        - name: backend
+          image: hadensmith/airbnb-welcome-backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: airbnb-backend-secret
+          volumeMounts:
+            - name: backend-data
+              mountPath: /app/guestbook.db
+              subPath: guestbook.db
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+      volumes:
+        - name: backend-data
+          persistentVolumeClaim:
+            claimName: airbnb-backend-data

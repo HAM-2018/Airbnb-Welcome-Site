@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: airbnb-frontend
+  namespace: airbnb-welcome
+spec:
+  type: LoadBalancer
+  selector:
+    app: airbnb-frontend
+  ports:
+    - port: 80
+      targetPort: 3000

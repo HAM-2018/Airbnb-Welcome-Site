@@ -4,7 +4,8 @@ import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000";
+  process.env.NEXT_PUBLIC_API_BASE_URL ?? "/api";
+
 
 export default function ReportIssuePage() {
   const [name, setName] = useState("");
