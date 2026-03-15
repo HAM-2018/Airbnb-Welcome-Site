@@ -6,6 +6,7 @@ frontend/out/
 backend/.venv/
 backend/app/.env
 backend/guestbook.db
+k8s/backend-secret.yaml
 
 __pycache__/
 *.py[cod]
