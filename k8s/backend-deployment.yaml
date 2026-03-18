@@ -47,5 +47,4 @@ spec:
             periodSeconds: 20
       volumes:
         - name: backend-data
-          persistentVolumeClaim:
-            claimName: airbnb-backend-data
+          emptyDir: {}
