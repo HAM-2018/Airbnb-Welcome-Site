@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: airbnb-welcome
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/HAM-2018/Airbnb-Welcome-Site.git
+    targetRevision: main
+    path: k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: airbnb-welcome
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
