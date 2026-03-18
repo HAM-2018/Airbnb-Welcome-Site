@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: hadensmith/airbnb-welcome-frontend:3345d4149c51f1c244a49cdceb028539bb02333e
+          image: hadensmith/airbnb-welcome-frontend:52c2c44e1b1ac9ed2a52718cb0ed35a745e6f9f6
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
