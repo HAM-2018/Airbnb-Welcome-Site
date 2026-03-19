@@ -24,7 +24,7 @@ spec:
               mountPath: /data
       containers:
         - name: backend
-          image: hadensmith/airbnb-welcome-backend:80be3071cf2221574f3a633dbdb1269a0dceaa61
+          image: hadensmith/airbnb-welcome-backend:887fe7958e6dbca232f30c311680b0e66970aae7
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
