@@ -13,6 +13,8 @@ spec:
       labels:
         app: airbnb-backend
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: node-1
       initContainers:
         - name: init-db-file
           image: busybox:1.36
@@ -47,4 +49,5 @@ spec:
             periodSeconds: 20
       volumes:
         - name: backend-data
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: airbnb-backend-data
